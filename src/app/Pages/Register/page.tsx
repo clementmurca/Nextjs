@@ -1,23 +1,13 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import axios from "axios"
-import { useState, useEffect } from 'react'
+import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 
 export default function Register() {
-
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const router = useRouter();
@@ -32,12 +22,13 @@ export default function Register() {
     } catch (error) {
         console.error('La connexion a échoué', error);
     }
-};
+  };
+
 
   return (
     <div className="flex flex-col items-center justify-center p-12 bg-customBg">
       <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-        Page de connexion
+        Page d'inscription
       </h2>
     <div className="mt-10 flex justify-center" role="form">
       <Card className="w-[350px] bg-white/50">

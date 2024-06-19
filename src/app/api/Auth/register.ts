@@ -9,27 +9,21 @@ interface RequestBody {
     password: string;
 }
 
-interface User {
-    email: string;
-    password: string;
-}
-
 export default async function handle(req: NextApiRequest, res: NextApiResponse): Promise<void> {
-    
-    if(req.method === 'POST') {
+    if (req.method === 'POST') {
         const { email, password }: RequestBody = req.body;
         const salt: string = bcrypt.genSaltSync(10);
         const hashedPassword: string = bcrypt.hashSync(password, salt);
-        
+
         try {
-            const newUser: User = await prisma.user.create({
+            const newUser = await prisma.user.create({
                 data: {
                     email,
                     password: hashedPassword
                 },
             });
             res.status(201).json({ newUser });
-        } catch(error: unknown) {
+        } catch (error) {
             if (error instanceof Error) {
                 res.status(500).json({ message: "Création d'un utilisateur a échoué", error: error.message });
             } else {
