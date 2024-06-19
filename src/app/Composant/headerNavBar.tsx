@@ -9,22 +9,22 @@ const HeaderNavBar: React.FC = () => {
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
             <li>
-              <Link href="/" className="block py-2 pr-4 pl-3 text-customColorP rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">
+              <Link href="/Pages/Accueil" className="block py-2 pr-4 pl-3 text-customColorP rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">
                 Accueil
               </Link>
             </li>
             <li>
-              <Link href="/" className="block py-2 pr-4 pl-3 text-customColorP rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">
+              <Link href="/Pages/Login" className="block py-2 pr-4 pl-3 text-customColorP rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">
                 Se connecter
               </Link>
             </li>
             <li>
-              <Link href="/" className="block py-2 pr-4 pl-3 text-customColorP rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">
+              <Link href="/Pages/Register" className="block py-2 pr-4 pl-3 text-customColorP rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">
                 S'inscrire
               </Link>
             </li>
             <li>
-              <Link href="/Dashboard" className="block py-2 pr-4 pl-3 text-customColorP rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">
+              <Link href="/Pages/Dashboard" className="block py-2 pr-4 pl-3 text-customColorP rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">
                 Dashboard
               </Link>
             </li>
