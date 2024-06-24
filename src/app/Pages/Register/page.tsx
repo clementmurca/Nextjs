@@ -1,96 +1,120 @@
-'use client'
-import React, { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import axios from 'axios'
-import { useRouter } from 'next/navigation'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 export default function Register() {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
+  const [name, setName] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
-        const response = await axios.post('/api/Auth/register', { email, password });
-        localStorage.setItem('token', response.data.token);
-        router.push('/Pages/dashboard');
+      await axios.post('/api/register', { email, password, name });
+      router.push('/Pages/Dashboard');
     } catch (error) {
-        console.error('La connexion a échoué', error);
+      console.error('L\'inscription a échoué:', error);
     }
   };
 
+    return (
+        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 customBg">
+            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+                <img
+                    className="mx-auto h-10 w-auto"
+                    src="https://hawaiiwebmarket.fr/wp-content/uploads/2023/05/hwm_logo_couleurs@2x.webp"
+                    alt="Votre Entreprise"
+                />
+                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                    Créez votre compte
+                </h2>
+            </div>
+            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                <form onSubmit={handleSubmit}>
+                <fieldset>
+                        <label
+                            className="py-2"
+                            id="emailLabel"
+                            htmlFor="name">
+                            Nom et prénom
+                        </label>
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Nom et prénom"
+                            required
+                            aria-required="true"
+                            aria-describedby="emailHelp"
+                            aria-labelledby="emailLabel"
+                            tabIndex={1}
+                            autoComplete="name"
+                            name="name"
+                            id="name"
+                            className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                        <small id="emailHelp">Exemple : JohnDoe@example.fr</small>
+                    </fieldset>
+                    <fieldset>
+                        <label
+                            className="py-2"
+                            id="emailLabel"
+                            htmlFor="email">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="E-mail"
+                            required
+                            aria-required="true"
+                            aria-describedby="emailHelp"
+                            aria-labelledby="emailLabel"
+                            tabIndex={2}
+                            autoComplete="username"
+                            name="email"
+                            id="email"
+                            className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                        <small id="emailHelp">Exemple : JohnDoe@example.fr</small>
+                    </fieldset>
 
-  return (
-    <div className="flex flex-col items-center justify-center p-12 bg-customBg">
-      <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-        Page d'inscription
-      </h2>
-    <div className="mt-10 flex justify-center" role="form">
-      <Card className="w-[350px] bg-white/50">
-        <CardHeader>
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://hawaiiwebmarket.fr/wp-content/uploads/2023/05/hwm_logo_couleurs@2x.webp"
-            alt="Hawaii Communication"
-          />
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit}>
-            <fieldset className="">
-              <Label className="" 
-                id="emailLabel"
-                htmlFor="email">
-                  Email
-              </Label>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="E-mail"
-                required
-                aria-required="true"
-                aria-describedby="emailHelp"
-                aria-labelledby="emailLabel"
-                tabIndex={1}
-                name="email"
-                id="email"
-                className="mt-1"
-              />
-            </fieldset>
-
-            <fieldset className="mt-4">
-              <Label className=""
-                id="passwordLabel"
-                htmlFor="password">
-                  Mot de passe
-              </Label>
-            <Input
-              name="password"
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Mot de passe"
-              required
-              aria-required="true"
-              aria-describedby="passwordHelp"
-              aria-labelledby="passwordLabel"
-              tabIndex={2}
-              className="mt-1"
-            />
-          </fieldset>
-            <CardFooter className="flex justify-center mt-4">
-              <Button type="submit" className="">S'inscrire</Button>
-            </CardFooter>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
-  </div>
-  )
+                    <fieldset className="mt-4">
+                        <label
+                            className="py-2"
+                            id="passwordLabel"
+                            htmlFor="password">
+                            Mot de passe
+                        </label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Mot de passe"
+                            required
+                            aria-required="true"
+                            aria-describedby="passwordHelp"
+                            aria-labelledby="passwordLabel"
+                            tabIndex={3}
+                            autoComplete="current-password"
+                            name="password"
+                            id="password"
+                            className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                        <small id="passwordHelp">Votre mot de passe doit contenir au moins 8 caractères.</small>
+                    </fieldset>
+                    <button 
+                        type="submit"
+                        className="mt-6 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        S'inscrire
+                    </button>
+                </form>
+            </div>
+        </div>
+    );
 }
